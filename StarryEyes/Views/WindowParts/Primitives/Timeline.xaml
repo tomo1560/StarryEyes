@@ -1218,9 +1218,9 @@
                                             </ItemsControl.ItemsPanel>
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate DataType="{x:Type statuses:ThumbnailImageViewModel}">
-                                                    <Border Width="60"
-                                                            Height="60"
-                                                            Margin="8,8,0,0"
+                                                    <Border Width="160"
+                                                            Height="90"
+                                                            Margin="4,4,0,0"
                                                             HorizontalAlignment="Left"
                                                             VerticalAlignment="Top"
                                                             Background="#80808080"
@@ -1233,7 +1233,8 @@
                                                             </i:EventTrigger>
                                                         </i:Interaction.Triggers>
                                                         <controls:LazyImage Cursor="Hand"
-                                                                            DecodePixelHeight="60"
+                                                                            DecodePixelWidth="160"
+                                                                            DecodePixelHeight="90"
                                                                             RenderOptions.BitmapScalingMode="HighQuality"
                                                                             Stretch="UniformToFill"
                                                                             UriSource="{Binding DisplayUri,
@@ -1257,8 +1258,8 @@
                                                        Foreground="{DynamicResource SubTextBrush}"
                                                        IsHitTestVisible="False"
                                                        Text="{Binding CreatedAt,
-                                                                      FallbackValue=0:00,
-                                                                      StringFormat=H:mm,
+                                                                      FallbackValue=00:00:ss,
+                                                                      StringFormat=HH:mm:ss,
                                                                       Mode=OneTime}"
                                                        TextWrapping="NoWrap" />
                                             <TextBlock x:Name="LongTime"
@@ -1273,8 +1274,8 @@
                                                        Opacity="0"
                                                        Text="{Binding CreatedAt,
                                                                       Mode=OneTime,
-                                                                      FallbackValue=0:00:00 - 0 Nil \'00,
-                                                                      StringFormat=H:mm:ss - d MMM \\\'yy}"
+                                                                      FallbackValue=00:00:00 - 0 Nil \'00,
+                                                                      StringFormat=HH:mm:ss \\\'yy-MM-dd ddd\\.}"
                                                        TextWrapping="NoWrap"
                                                        Visibility="Hidden">
                                                 <i:Interaction.Triggers>

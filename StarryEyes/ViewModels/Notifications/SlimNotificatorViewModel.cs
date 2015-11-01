@@ -145,7 +145,7 @@ namespace StarryEyes.ViewModels.Notifications
             }
         }
 
-        public string Description
+        public string SourceUser
         {
             get
             {
@@ -154,20 +154,60 @@ namespace StarryEyes.ViewModels.Notifications
                     case SlimNotificationKind.New:
                     case SlimNotificationKind.Mention:
                     case SlimNotificationKind.Message:
-                        return RemoveLines(_data.TargetStatus.ToString());
+                        return _data.TargetStatus.User.ScreenName;
                     case SlimNotificationKind.Follow:
-                        return RemoveLines("@" + _data.SourceUser.ScreenName + " follows @" + _data.TargetUser.ScreenName);
                     case SlimNotificationKind.Favorite:
-                        return RemoveLines("@" + _data.SourceUser.ScreenName + " favorites " + _data.TargetStatus);
                     case SlimNotificationKind.Retweet:
-                        return RemoveLines("@" + _data.SourceUser.ScreenName + " retweets " + _data.TargetStatus);
+                        return _data.SourceUser.ScreenName;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
         }
 
-        private string RemoveLines(string text)
+        public string Verb
+        {
+            get
+            {
+                switch (_data.Kind)
+                {
+                    case SlimNotificationKind.New:
+                    case SlimNotificationKind.Mention:
+                    case SlimNotificationKind.Message:
+                        return "";
+                    case SlimNotificationKind.Follow:
+                        return "followed";
+                    case SlimNotificationKind.Favorite:
+                        return "favorited";
+                    case SlimNotificationKind.Retweet:
+                        return "retweeted";
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
+        public string Body
+        {
+            get
+            {
+                switch (_data.Kind)
+                {
+                    case SlimNotificationKind.Follow:
+                        return "@" + _data.TargetUser.ScreenName;
+                    case SlimNotificationKind.New:
+                    case SlimNotificationKind.Mention:
+                    case SlimNotificationKind.Message:
+                    case SlimNotificationKind.Favorite:
+                    case SlimNotificationKind.Retweet:
+                        return RemoveLines(_data.TargetStatus.Text);
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
+        private static string RemoveLines(string text)
         {
             return text.Replace("\r", "").Replace("\n", "");
         }

@@ -1444,7 +1444,7 @@ namespace StarryEyes.ViewModels.Timelines.Statuses
         {
             if (_display.Host == TwitterImageHost && Setting.OpenTwitterImageWithOriginalSize.Value)
             {
-                BrowserHelper.Open(new Uri(_display.OriginalString + ":orig"));
+                BrowserHelper.Open(new Uri(_display.OriginalString + (_display.OriginalString.EndsWith(".mp4") ? "" : ":orig")));
             }
             else
             {

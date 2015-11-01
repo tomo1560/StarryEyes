@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -1403,7 +1404,15 @@ namespace StarryEyes.ViewModels.Timelines.Statuses
                     SearchFlipModel.RequestSearch(param.Item2, SearchMode.Web);
                     break;
                 case LinkType.Url:
-                    BrowserHelper.Open(param.Item2);
+                    var match = Regex.Match(param.Item2, "https://twitter.com/[^/]+/status/(\\d+)");
+                    if (match.Success)
+                    {
+                        SearchFlipModel.RequestSearch("?from conv:\"" + match.Groups[1].Value + "\"", SearchMode.Local);
+                    }
+                    else
+                    {
+                        BrowserHelper.Open(param.Item2);
+                    }
                     break;
             }
         }

@@ -100,7 +100,7 @@ namespace StarryEyes.Anomaly
                 }
                 else
                 {
-                    result.Append('%' + String.Format("{0:x2}", (int)data[i]));
+                    result.Append(String.Format("%{0:x2}", (int)data[i]));
                 }
             }
             return result.ToString();

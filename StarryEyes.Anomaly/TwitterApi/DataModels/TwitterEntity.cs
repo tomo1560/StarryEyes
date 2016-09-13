@@ -42,7 +42,16 @@ namespace StarryEyes.Anomaly.TwitterApi.DataModels
                 var urls = json.urls;
                 foreach (var url in urls)
                 {
-                    string display = url.url;
+                    string display;
+                    try
+                    {
+                        // JSONにURLが含まれていない場合があるので、例外が飛んできたら処理を中止する。
+                        display = url.url;
+                    }
+                    catch (Exception)
+                    {
+                        goto nourl;
+                    }
                     string expanded = url.url;
                     if (url.display_url())
                     {
@@ -60,6 +69,8 @@ namespace StarryEyes.Anomaly.TwitterApi.DataModels
                         StartIndex = (int)url.indices[0],
                         EndIndex = (int)url.indices[1]
                     };
+                    nourl:
+                    ;
                 }
             }
             if (json.IsDefined("user_mentions"))

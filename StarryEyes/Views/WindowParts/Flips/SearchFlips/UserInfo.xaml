@@ -212,6 +212,22 @@
                                Foreground="{DynamicResource UserFlipForegroundBrush}"
                                Text="{Binding User.Name,
                                               Mode=OneWay}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Margin="8,6,4,6"
+                                 Background="{DynamicResource UserFlipBackgroundBrush}"
+                                 BorderThickness="0"
+                                 Foreground="{DynamicResource UserFlipForegroundBrush}"
+                                 IsReadOnly="True"
+                                 Text="{Binding User.User.Id,
+                                                Mode=OneWay}" />
+                        <TextBox Margin="4,6,8,6"
+                                 Background="{DynamicResource UserFlipBackgroundBrush}"
+                                 BorderThickness="0"
+                                 Foreground="{DynamicResource UserFlipForegroundBrush}"
+                                 IsReadOnly="True"
+                                 Text="{Binding User.CreatedAt,
+                                                Mode=OneWay}" />
+                    </StackPanel>
                     <TextBlock Margin="8,6"
                                VerticalAlignment="Top"
                                Foreground="{DynamicResource UserFlipForegroundBrush}"
@@ -575,6 +591,22 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Margin="8,6,4,6"
+                                 Background="{DynamicResource UserFlipBackgroundBrush}"
+                                 BorderThickness="0"
+                                 Foreground="{DynamicResource UserFlipForegroundBrush}"
+                                 IsReadOnly="True"
+                                 Text="{Binding User.User.Id,
+                                                Mode=OneWay}" />
+                        <TextBox Margin="4,6,8,6"
+                                 Background="{DynamicResource UserFlipBackgroundBrush}"
+                                 BorderThickness="0"
+                                 Foreground="{DynamicResource UserFlipForegroundBrush}"
+                                 IsReadOnly="True"
+                                 Text="{Binding User.CreatedAt,
+                                                Mode=OneWay}" />
+                    </StackPanel>
                     <TextBlock Margin="8,6"
                                VerticalAlignment="Top"
                                Foreground="{DynamicResource UserFlipForegroundBrush}"

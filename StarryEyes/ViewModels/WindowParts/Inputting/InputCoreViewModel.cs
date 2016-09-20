@@ -802,8 +802,9 @@ namespace StarryEyes.ViewModels.WindowParts.Inputting
                 {
                     return false; // send account is not found.
                 }
-                if (TextCount > TwitterConfigurationService.TextMaxLength)
-                    return false;
+                // 文字数カウントがめっっっちゃめんｄなので文字数オーバーでも送信可能とする。
+                //if (TextCount > TwitterConfigurationService.TextMaxLength)
+                //    return false;
                 return IsImageAttached || !String.IsNullOrEmpty(
                     InputText.Replace("\t", "")
                              .Replace("\r", "")

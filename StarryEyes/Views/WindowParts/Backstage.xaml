@@ -154,6 +154,31 @@
                                             <ei:CallMethodAction MethodName="OpenEventSourceUserProfile" TargetObject="{Binding}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="対象ユーザを表示(_U)">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <ei:CallMethodAction MethodName="OpenEventTargetUserProfile" TargetObject="{Binding}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </MenuItem>
+                                            <MenuItem Header="対象ツイートを表示(_T)">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <ei:CallMethodAction MethodName="OpenEventTargetStatus" TargetObject="{Binding}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </MenuItem>
+                                            <MenuItem Header="ユーザを表示(_S)">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <ei:CallMethodAction MethodName="OpenEventSourceUserProfile" TargetObject="{Binding}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </MenuItem>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
                                     <Image Width="16"
                                            Height="16"
                                            Margin="8,8,4,8"

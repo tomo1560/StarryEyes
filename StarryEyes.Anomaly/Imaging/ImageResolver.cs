@@ -89,7 +89,9 @@ namespace StarryEyes.Anomaly.Imaging
                         var builder = new UriBuilder(p) {Scheme = "pixiv"};
                         return builder.Uri.OriginalString;
                     }
-                }
+                },
+                {"https://www.flickr.com/photos/", s =>
+                    "http://img.azyobuzi.net/api/redirect?uri=" + s + "&size=thumb"}
             };
 
         private static string EnsureEndsWithSlash(string url)
@@ -115,7 +117,18 @@ namespace StarryEyes.Anomaly.Imaging
             // pick attached images 
             status.Entities.Guard()
                   .Where(e => e.EntityType == EntityType.Media)
-                  .ForEach(e => result.Add(Tuple.Create(e.OriginalUrl, e.MediaUrl)));
+                  .ForEach(e =>
+                  {
+                      var mediaUrl = e.MediaUrl;
+                      if (e.MediaUrl.Contains("/tweet_video_thumb/"))
+                      {
+                          mediaUrl = mediaUrl
+                              .Remove(mediaUrl.LastIndexOf('.'))
+                              .Replace("/tweet_video_thumb/", "/tweet_video/")
+                              + ".mp4";
+                      }
+                      result.Add(Tuple.Create(e.OriginalUrl, mediaUrl));
+                  });
 
             // resolve url in status text
             var matches = UrlRegex.Matches(status.GetEntityAidedText(EntityDisplayMode.MediaUri)).Cast<Match>();

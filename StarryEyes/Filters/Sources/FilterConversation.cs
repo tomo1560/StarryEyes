@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using StarryEyes.Albireo.Collections;
 using StarryEyes.Anomaly.TwitterApi.DataModels;
 using StarryEyes.Models.Databases;
+using StarryEyes.Models.Stores;
 
 namespace StarryEyes.Filters.Sources
 {
@@ -44,6 +45,7 @@ namespace StarryEyes.Filters.Sources
                 _isPreparing = true;
                 var queue = new Queue<long>();
                 var list = new List<long>();
+                await StoreHelper.GetTweetAsync(origin);
                 queue.Enqueue(await FindHeadAsync(origin).ConfigureAwait(false));
                 while (queue.Count > 0)
                 {

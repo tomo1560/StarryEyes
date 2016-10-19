@@ -297,7 +297,7 @@ namespace StarryEyes.ViewModels
                         ExpandedInfo = AppInitResources.MsgCleanupConfigExInfo,
                         CommonButtons = TaskDialogCommonButtons.YesNo
                     }));
-                Setting.AutoCleanupTweets.Value = msg.Response.Result == TaskDialogSimpleResult.Yes;
+                Setting.AutoCleanupTweets.Value = (msg.Response == null) ? true : msg.Response.Result == TaskDialogSimpleResult.Yes;
                 Setting.AutoCleanupThreshold.Value = 100000;
             }
 
@@ -318,7 +318,7 @@ namespace StarryEyes.ViewModels
                             CommonButtons = TaskDialogCommonButtons.Close,
                             VerificationText = Resources.MsgDoNotShowAgain
                         }));
-                    Setting.ShowStartupConfigurationWarning.Value = !msg.Response.VerificationChecked.GetValueOrDefault();
+                    Setting.ShowStartupConfigurationWarning.Value = (msg.Response == null) ? false : !msg.Response.VerificationChecked.GetValueOrDefault();
                 }
                 else if (App.DatabaseDirectoryUserSpecified)
                 {
@@ -334,7 +334,7 @@ namespace StarryEyes.ViewModels
                             CommonButtons = TaskDialogCommonButtons.Close,
                             VerificationText = Resources.MsgDoNotShowAgain
                         }));
-                    Setting.ShowStartupConfigurationWarning.Value = !msg.Response.VerificationChecked.GetValueOrDefault();
+                    Setting.ShowStartupConfigurationWarning.Value = (msg.Response == null) ? false : !msg.Response.VerificationChecked.GetValueOrDefault();
                 }
             }
 

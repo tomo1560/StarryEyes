@@ -13,15 +13,15 @@ namespace StarryEyes.Anomaly.TwitterApi.Rest
         public static async Task<IEnumerable<TwitterStatus>> SearchAsync(
             this IOAuthCredential credential, string query,
             string geoCode = null, string lang = null, string locale = null,
-            SearchResultType resultType = SearchResultType.Mixed,
+            SearchResultType resultType = SearchResultType.Recent,
             int? count = null, DateTime? untilDate = null,
             long? sinceId = null, long? maxId = null)
         {
             if (credential == null) throw new ArgumentNullException("credential");
-            if (query == null) throw new ArgumentNullException("query");
+            if (query == null || query.IsEmpty()) throw new ArgumentNullException("query");
             var param = new Dictionary<string, object>
             {
-                {"q", query},
+                {"q", query /*+ " -filter:retweets"*/},
                 {"geocode", geoCode},
                 {"lang", lang},
                 {"locale", locale},
